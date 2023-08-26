@@ -16,6 +16,18 @@ pipeline {
             steps {
                 sh 'mvn clean package' // Example Maven command
             }
+            post{
+                success
+                {
+                    echo "Archiving the Artifacts"
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
+        }
+        stage ('Deploy to tomcat server') {
+           steps {
+               deploy adapters: [tomcat9(path: '', url: 'http://13.127.191.18:8080/')], contextPath: null, war: '**/*.war'
+            }
         }
 
     }
