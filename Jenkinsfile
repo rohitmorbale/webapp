@@ -1,21 +1,14 @@
 pipeline {
-  agent any
-  tools {
-    maven 'Maven'
-}
-stages {
-    stage ('Initialize') {
-      steps {
-        sh '''
-                echo "PATH = ${PATH}"
-                echo "M2_HOME = ${M2_HOME}"
-             '''
-      }
+    agent any
+    tools {
+        maven 'Maven' // Make sure the tool name matches the configured name
     }
-
-    stage ('Build') {
-        sh 'mvn clean package'
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn clean install' // Example Maven command
+            }
+        }
     }
-
-  }
 }
+
