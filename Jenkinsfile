@@ -20,16 +20,7 @@ pipeline {
 	    }
 		    
 	    }
-	    stage ('Source Composition Analysis'){
-	    steps {
-		    sh 'rm owasp* || true'
-		  sh 'wget "https://raw.githubusercontent.com/rohitmorbale/webapp/master/owasp-depend-check.sh" '
-	         sh 'chmod +x owasp-depend-check.sh'
-		    sh 'bash owasp-depend-check.sh'
-		    sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
-
-	      }
-	    }
+	   
         stage('Build') {
             steps {
                 sh 'mvn clean package' // Example Maven command
